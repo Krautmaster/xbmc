@@ -562,7 +562,8 @@ bool CVDPAU::Supports(EINTERLACEMETHOD method)
 
   if (hasVdpauGlInterop)
   {
-    if (method == VS_INTERLACEMETHOD_RENDER_BOB)
+    if (method == VS_INTERLACEMETHOD_RENDER_BOB
+    || method == VS_INTERLACEMETHOD_FORCE_VDPAU_NONE)
       return true;
   }
 
@@ -997,7 +998,7 @@ bool CVDPAU::ConfigOutputMethod(AVCodecContext *avctx, AVFrame *pFrame)
     m_bVdpauDeinterlacing = true;
   }
 
-  if (!m_bVdpauDeinterlacing && method != VS_INTERLACEMETHOD_VDPAU_NONE && hasVdpauGlInterop)
+  if (!m_bVdpauDeinterlacing && method != VS_INTERLACEMETHOD_FORCE_VDPAU_NONE && hasVdpauGlInterop)
   {
     if (m_vdpauOutputMethod == OUTPUT_GL_INTEROP_YUV)
       return true;
