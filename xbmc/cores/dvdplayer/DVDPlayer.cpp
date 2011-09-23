@@ -378,6 +378,10 @@ bool CDVDPlayer::OpenFile(const CFileItem& file, const CPlayerOptions &options)
     if (m_bStop || m_bAbortRequest)
       return false;
 
+#if defined(HAS_VIDEO_PLAYBACK)
+    g_renderManager.PreInit();
+#endif
+
     return true;
   }
   catch(...)

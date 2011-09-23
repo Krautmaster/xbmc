@@ -194,11 +194,6 @@ bool CDVDPlayerVideo::OpenStream( CDVDStreamInfo &hint )
 
   unsigned int surfaces = 0;
 #ifdef HAS_VIDEO_PLAYBACK
-  if(!m_output.inited)
-  {
-    g_renderManager.PreInit();
-    m_output.inited = true;
-  }
   surfaces = g_renderManager.GetProcessorSize();
 #endif
 
