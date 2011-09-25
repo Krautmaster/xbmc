@@ -2833,6 +2833,12 @@ bool CDVDPlayer::OpenAudioStream(int iStream, int source)
   if(m_CurrentAudio.id    < 0
   || m_CurrentAudio.hint != hint)
   {
+    if(m_CurrentAudio.id >= 0)
+    {
+      CLog::Log(LOGDEBUG, " - audio codec's hints have changed, must close previous stream");
+      CloseAudioStream(true);
+    }
+
     if (!m_dvdPlayerAudio.OpenStream( hint ))
     {
       /* mark stream as disabled, to disallaw further attempts*/
@@ -2888,6 +2894,12 @@ bool CDVDPlayer::OpenVideoStream(int iStream, int source)
   if(m_CurrentVideo.id    < 0
   || m_CurrentVideo.hint != hint)
   {
+    if(m_CurrentVideo.id >= 0)
+    {
+      CLog::Log(LOGDEBUG, " - video codec's hints have changed, must close previous stream");
+      CloseVideoStream(false);
+    }
+
     if (!m_dvdPlayerVideo.OpenStream(hint))
     {
       /* mark stream as disabled, to disallaw further attempts */
